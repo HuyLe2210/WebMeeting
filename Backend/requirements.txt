@@ -1,0 +1,16 @@
+flask
+flask_wtf
+flask_login
+flask_sqlalchemy
+flask_cors
+insightface
+opencv-python
+numpy
+scipy
+onnxruntime
+fastapi
+uvicorn
+python-dotenv
+pymysql
+werkzeug
+PyJWT
