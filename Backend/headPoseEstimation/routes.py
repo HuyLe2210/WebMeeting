@@ -8,7 +8,7 @@ from flask import Blueprint, jsonify
 import mediapipe as mp
 
 # Blueprint
-head_estimation_bp = Blueprint('head_estimation', __name__)
+head_estimation_bp = Blueprint('headPoseEstimation', __name__)
 
 # Load model
 model = pickle.load(open('./model.pkl', 'rb'))
