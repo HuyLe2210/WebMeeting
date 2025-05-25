@@ -11,6 +11,10 @@ const M0101 = () => {
       window.location.href = '/meeting/join';
     } else if (target === 'user') {
       window.location.href = '/admin/account/list';
+    } else if (target === 'camera') {
+      window.location.href = '/meeting/page';
+    } else if (target === 'examp') {
+      window.location.href = '/meeting/test';
     }
   };
   return (
@@ -98,6 +102,54 @@ const M0101 = () => {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Quản lý thông tin người dùng.
+            </Typography>
+          </Paper>
+        </Grid>
+
+        {/* Module: Người dùng */}
+        <Grid item xs={12} md={6} sx={{maxWidth: '300px', mt: 2 }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              '&:hover': {
+                backgroundColor: '#f0f0f0',
+              },
+            }}
+            onClick={() => {handleChangePageClick('camera') }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Quản lý dự thi
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Quản lý camera các thí sinh dự thi.
+            </Typography>
+          </Paper>
+        </Grid>
+
+        {/* Module: Người dùng */}
+        <Grid item xs={12} md={6} sx={{maxWidth: '300px', mt: 2 }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              '&:hover': {
+                backgroundColor: '#f0f0f0',
+              },
+            }}
+            onClick={() => {handleChangePageClick('examp') }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Dự thi
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Tham gia làm bài thi trực tuyến.
             </Typography>
           </Paper>
         </Grid>

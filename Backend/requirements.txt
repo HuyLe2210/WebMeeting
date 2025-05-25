@@ -15,3 +15,6 @@ pymysql
 werkzeug
 PyJWT
 mediapipe
+pandas
+flask-socketio 
+eventlet

@@ -23,9 +23,13 @@ import UserManagementPage from './containers/user/ListUser';
 import AddUserPage from './containers/user/AddUser';
 
 import RegisterUser from './containers/Res01/index';
+import RegisterCamera from './containers/Res02/index';
+import BackendCamera from './containers/Res03/index';
 
 import MeetingJoin from './containers/ZG01/index';
 import MeetingRoom from './containers/ZG02/index';
+import MeetingTest from './containers/Meet01/index';
+import MeetingPage from './containers/Meet02/index';
 
 const routes = [
   {
@@ -72,11 +76,14 @@ const routes = [
 
       // User management
       { path: 'registeruser', element: <RegisterUser /> },
-      { path: 'registeruser/add', element: <RegisterUser /> },
-      { path: 'registeruser/edit/:id', element: <RegisterUser /> },
+      { path: 'registeruser/camera', element: <RegisterCamera /> },
+      { path: '/backend/camera', element: <BackendCamera /> },
 
       { path: 'meeting/join', element: <MeetingJoin /> },
       { path: 'meeting/room', element: <MeetingRoom /> },
+
+      { path: 'meeting/test', element: <MeetingTest /> },
+      { path: 'meeting/page', element: <MeetingPage /> },
       // Fallback
       // { path: '*', element: <Navigate to="/errors/error-404" /> },
     ],

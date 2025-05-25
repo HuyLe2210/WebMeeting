@@ -91,11 +91,14 @@ const RegisterUser = () => {
       >
         <Toolbar />
         <List>
-          <ListItem button onClick={() => navigate("/user")}>
+          <ListItem button onClick={() => navigate("/registeruser/camera")}>
             <ListItemText primary="Danh sách nhân viên" />
           </ListItem>
-          <ListItem sx={{ color: 'red' }} button onClick={() => navigate("/user_collect")}>
+          <ListItem sx={{ color: 'red' }} button onClick={() => navigate("/registeruser")}>
             <ListItemText primary="Đăng ký" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/backend/camera")}> 
+            <ListItemText primary="Mở camera backend" />
           </ListItem>
         </List>
       </Drawer>
