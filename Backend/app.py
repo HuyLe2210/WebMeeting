@@ -4,6 +4,7 @@ from api.User.model import User
 from flask_cors import CORS 
 from api.User.router import user_routes
 from api.Zego.router import zego_routes
+from headPoseEstimation.routes import head_estimation_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -26,7 +27,7 @@ def get_users():
     ])
 app.register_blueprint(user_routes)
 app.register_blueprint(zego_routes)
-
+app.register_blueprint(head_estimation_bp)
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
