@@ -1,0 +1,20 @@
+# Bỏ qua thư mục môi trường ảo
+venv/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Bỏ qua các file log, database tạm, và thư mục IDE
+*.log
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# PyCharm
+.idea/
