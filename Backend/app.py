@@ -5,6 +5,8 @@ from flask_cors import CORS
 from api.User.router import user_routes
 from api.Zego.router import zego_routes
 from api.Recognic.router import recognic_routes
+from api.Examp.router import exam_answer_routes
+from api.Question.router import question_routes
 from flask_socketio import SocketIO
 from api.Signal.controller import init_socket_events
 from recognition import recognition_bp
@@ -32,6 +34,8 @@ def get_users():
 app.register_blueprint(user_routes)
 app.register_blueprint(zego_routes)
 app.register_blueprint(recognition_bp)
+app.register_blueprint(exam_answer_routes)
+app.register_blueprint(question_routes)
 app.register_blueprint(recognic_routes)
 
 init_socket_events(socketio)
