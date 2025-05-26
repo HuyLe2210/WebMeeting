@@ -22,3 +22,27 @@ export const uploadImage = async ({ username, image }) => {
     throw error;
   }
 };
+
+// Gửi bài làm gồm 10 câu trả lời
+export const createExamAnswer = async (payload) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/exam-answers`, payload, {
+      headers: { "Content-Type": "application/json" }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Lỗi khi gửi bài thi:", error);
+    throw error;
+  }
+};
+
+// Lấy toàn bộ danh sách câu hỏi từ server
+export const getAllQuestions = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/questions`);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách câu hỏi:", error);
+    throw error;
+  }
+};
