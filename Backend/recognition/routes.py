@@ -7,6 +7,9 @@ from scipy.spatial.distance import cosine
 from insightface.app import FaceAnalysis
 import sqlite3
 from datetime import datetime
+import numpy as np
+FACES_FILE = 'dataset/faces.pkl'
+NAMES_FILE = 'dataset/names.pkl'
 
 
 UPLOAD_FOLDER = 'images'
@@ -85,4 +88,41 @@ def recognize():
 
     return jsonify({'error': 'No valid image'}), 400
 
+@recognition_bp.route('/register', methods=['POST'])
+def register_face():
+    if 'image' not in request.files or 'name' not in request.form:
+        return jsonify({'error': 'Missing image or name'}), 400
+
+    file = request.files['image']
+    name = request.form['name']
+
+    # Đọc ảnh
+    image_data = np.frombuffer(file.read(), np.uint8)
+    import cv2
+    img = cv2.imdecode(image_data, cv2.IMREAD_COLOR)
+
+    faces = face_app.get(img)
+    if len(faces) == 0:
+        return jsonify({'error': 'No face detected'}), 400
+    if len(faces) > 1:
+        return jsonify({'error': 'Multiple faces detected'}), 400
+
+    embedding = faces[0].embedding
+
+    # So sánh với database hiện tại
+    for stored_emb in faces_db:
+        dist = cosine(embedding, stored_emb)
+        if dist < 0.5:
+            return jsonify({'error': 'This face already exists in database'}), 400
+
+    # Thêm khuôn mặt mới
+    faces_db.append(embedding)
+    names_db.append(name)
+
+    with open(FACES_FILE, 'wb') as f:
+        pickle.dump(faces_db, f)
+    with open(NAMES_FILE, 'wb') as f:
+        pickle.dump(names_db, f)
+
+    return jsonify({'message': f'Face registered for {name}'}), 200
 
