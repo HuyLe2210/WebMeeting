@@ -45,29 +45,6 @@ def recognize(embedding):
 
     return "Không nhận diện được"  # Nếu không có sự tương đồng cao
 
-# Hàm nhận diện và trả về tên
-# def recognize(embedding):
-#     faces_db, names_db = load_database()
-#     threshold = 0.6  # Ngưỡng để nhận diện
-#     print("faces_db đã lấy:", len(faces_db))
-#     print("Embedding đã lấy:", embedding.shape)
-#     # Kiểm tra kiểu dữ liệu của từng embedding trong faces_db
-#     for i, db_embedding, name in enumerate(faces_db, names_db):
-#         print(f"Embedding {i} trong faces_db có kiểu dữ liệu: {type(db_embedding)}")
-#         if isinstance(db_embedding, tuple):
-#             print(f"Embedding {i} là tuple, chuyển đổi thành NumPy array.")
-#             db_embedding = np.array(db_embedding)  # Chuyển tuple thành NumPy array
-#             similarity = cosine_similarity(embedding, db_embedding)
-#             if similarity > threshold:  # Nếu độ tương đồng đủ cao, trả về tên
-#                 return name
-#         print(f"Embedding {i} trong faces_db có kích thước: {db_embedding.shape}")
-
-    # for db_embedding, name in zip(faces_db, names_db):
-    #     similarity = cosine_similarity(embedding, db_embedding)
-    #     if similarity > threshold:  # Nếu độ tương đồng đủ cao, trả về tên
-    #         return name
-
-    # return "Không nhận diện được"  # Nếu không có sự tương đồng cao
 
 # Hàm để giải mã base64 và chuyển thành hình ảnh PIL
 def decode_base64_image(base64_string):

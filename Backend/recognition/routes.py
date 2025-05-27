@@ -116,6 +116,8 @@ def register_face():
             return jsonify({'error': 'This face already exists in database'}), 400
 
     # Thêm khuôn mặt mới
+    faces_db = list(faces_db)
+    names_db = list(names_db)
     faces_db.append(embedding)
     names_db.append(name)
 
