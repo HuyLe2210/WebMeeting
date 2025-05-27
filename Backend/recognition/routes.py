@@ -90,11 +90,12 @@ def recognize():
 
 @recognition_bp.route('/register', methods=['POST'])
 def register_face():
-    if 'image' not in request.files or 'name' not in request.form:
+    data = request.get_json()
+    if not data or 'image' not in data or 'name' not in data:
         return jsonify({'error': 'Missing image or name'}), 400
 
-    file = request.files['image']
-    name = request.form['name']
+    file = data['image']
+    name = data['name']
 
     # Đọc ảnh
     image_data = np.frombuffer(file.read(), np.uint8)

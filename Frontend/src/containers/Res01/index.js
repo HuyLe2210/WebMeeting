@@ -53,7 +53,7 @@ const RegisterUser = () => {
     setError(null);
 
     const res = await registerUser(formData);
-    registerFace(formData.image);
+    registerFace(formData.image, formData.name);
     if (res.error || res.message === "Error creating user") {
       setError(res.message || "❌ Lỗi tạo người dùng");
     } else {

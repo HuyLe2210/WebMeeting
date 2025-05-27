@@ -26,12 +26,15 @@ export const registerUser = async (userData) => {
 };
 
 // Đăng ký người dùng mới
-export const registerFace = async (image) => {
+export const registerFace = async (imageBase64, name) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/register`, image);
-    return response.data;
-  } catch (error) {
-    console.error('Lỗi khi đăng ký người dùng:', error);
-    throw error;
+    const res = await axios.post(`${API_BASE_URL}/register`, {
+      image: imageBase64,
+      name: name
+    });
+    return res.data;
+  } catch (err) {
+    console.error("❌ Lỗi khi gọi registerFace:", err.response?.data || err.message);
+    return { error: true, message: err.response?.data?.error || "Lỗi không xác định" };
   }
 };
