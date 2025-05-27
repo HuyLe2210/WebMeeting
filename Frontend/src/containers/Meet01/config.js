@@ -8,11 +8,11 @@ const API_BASE_URL = 'http://localhost:5001';
 export const uploadImage = async ({ username, image }) => {
   try {
     const response = await axios.post(
-      "http://localhost:5001/api/upload-image",
+      `${API_BASE_URL}/api/upload-image`,
       { username, image },
       {
         headers: {
-          "Content-Type": "application/json", // ✅ THÊM DÒNG NÀY
+          "Content-Type": "application/json", 
         },
       }
     );

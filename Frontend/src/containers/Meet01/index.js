@@ -66,7 +66,7 @@ export default function UserPage() {
 
     intervalRef.current = setInterval(() => {
       captureAndSendFrame();
-    }, 1000000);
+    }, 50000);
   };
 
   const captureAndSendFrame = async () => {

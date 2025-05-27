@@ -24,3 +24,14 @@ export const registerUser = async (userData) => {
     throw error;
   }
 };
+
+// Đăng ký người dùng mới
+export const registerFace = async (image) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/register`, image);
+    return response.data;
+  } catch (error) {
+    console.error('Lỗi khi đăng ký người dùng:', error);
+    throw error;
+  }
+};

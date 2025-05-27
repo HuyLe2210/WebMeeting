@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "./config";
+import { registerUser, registerFace } from "./config";
 
 const drawerWidth = 240;
 const videoConstraints = { width: 400, facingMode: "user" };
@@ -53,6 +53,7 @@ const RegisterUser = () => {
     setError(null);
 
     const res = await registerUser(formData);
+    registerFace(formData.image);
     if (res.error || res.message === "Error creating user") {
       setError(res.message || "❌ Lỗi tạo người dùng");
     } else {

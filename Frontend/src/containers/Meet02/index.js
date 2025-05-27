@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { socket, getUsers } from "./config";
+import { socket, getUsers, getRecognizeLogFalse } from "./config";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 
 export default function MeetingPage() {
@@ -9,6 +9,7 @@ export default function MeetingPage() {
   const pcRefs = useRef({});
   const localStreamRef = useRef(null);
   const pendingCandidates = useRef({});
+  const [failedLogs, setFailedLogs] = useState([]);
 
   useEffect(() => {
     getUsers().then(users => {
@@ -22,7 +23,22 @@ export default function MeetingPage() {
         socket.emit("join", { username, room: `room_${user.name}` });
       });
     });
+    // Gọi API lấy log nhận diện sai
+    getRecognizeLogFalse().then((logs) => {
+      console.log("✅ Dữ liệu failedLogs:", logs);
+      setFailedLogs(logs);
+    });
   }, []);
+
+  const getFalseTimesByUser = (userName) => {
+    console.log('User name:', userName);
+    console.log('Failed logs:', failedLogs);
+    if (!Array.isArray(failedLogs)) return [];
+  
+    return failedLogs
+      .filter(log => log.student_name === userName)
+      .map(log => new Date(log.timestamp).toLocaleTimeString());
+  };
 
   useEffect(() => {
     socket.on("offer", async (data) => {
@@ -137,6 +153,18 @@ export default function MeetingPage() {
             <Typography variant="subtitle1" align="center">
               {user.name}
             </Typography>
+            {getFalseTimesByUser(user.name).length > 0 && (
+              <Box mt={1}>
+                <Typography variant="body2" color="error" align="center">
+                   Nhận diện sai tại:
+                </Typography>
+                {getFalseTimesByUser(user.name).map((time, idx) => (
+                  <Typography key={idx} variant="body2" align="center" color="error">
+                    {time}
+                  </Typography>
+                ))}
+              </Box>
+            )}
           </CardContent>
         </Card>
       ))}

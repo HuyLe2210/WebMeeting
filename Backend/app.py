@@ -7,13 +7,15 @@ from api.Zego.router import zego_routes
 from api.Recognic.router import recognic_routes
 from api.Examp.router import exam_answer_routes
 from api.Question.router import question_routes
+from api.RecognizeLog.router import recognition_routes
 from flask_socketio import SocketIO
 from api.Signal.controller import init_socket_events
 from recognition import recognition_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", max_http_buffer_size=100_000_000, async_mode='threading')
+
 
 # Khởi tạo SQLAlchemy
 db.init_app(app)
@@ -37,6 +39,7 @@ app.register_blueprint(recognition_bp)
 app.register_blueprint(exam_answer_routes)
 app.register_blueprint(question_routes)
 app.register_blueprint(recognic_routes)
+app.register_blueprint(recognition_routes)
 
 init_socket_events(socketio)
 
